@@ -36,11 +36,16 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          {variant === 'on-sale' && <OnSale>Sale</OnSale>}
+          {variant === 'new-release' && (
+            <JustReleased>Just Released!</JustReleased>
+          )}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price onSale={variant === 'on-sale'}>{formatPrice(price)}</Price>
+          <Price sale={variant === 'on-sale'}>{formatPrice(price)}</Price>
+          {/* <Price>{formatPrice(price)}</Price> */}
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
@@ -60,10 +65,7 @@ const Link = styled.a`
   flex-basis: 340px;
 `;
 
-const Wrapper = styled.article`
-  border-radius: 16px 16px 4px 4px;
-  overflow: hidden;
-`;
+const Wrapper = styled.article``;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -71,6 +73,7 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   max-width: 100%;
+  border-radius: 16px 16px 4px 4px;
 `;
 
 const Row = styled.div`
@@ -85,8 +88,8 @@ const Name = styled.h3`
 `;
 
 const Price = styled.span`
-  color: ${(props) => (props.onSale ? COLORS.gray[700] : '')};
-  text-decoration: ${(props) => (props.onSale ? 'line-through' : '')};
+  color: ${(props) => (props.sale ? COLORS.gray[700] : '')};
+  text-decoration: ${(props) => (props.sale ? 'line-through' : '')};
 `;
 
 const ColorInfo = styled.p`
@@ -96,6 +99,28 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`;
+
+const ImageTag = styled.span`
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  font-weight: 700;
+  font-size: ${14 / 16}rem;
+  height: 32px;
+  border-radius: 2px;
+  padding: 8px 10px;
+  line-height: 1;
+`;
+
+const JustReleased = styled(ImageTag)`
+  background-color: ${COLORS.secondary};
+  color: ${COLORS.white};
+`;
+
+const OnSale = styled(ImageTag)`
+  background-color: ${COLORS.primary};
+  color: ${COLORS.white};
 `;
 
 export default ShoeCard;
