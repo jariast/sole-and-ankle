@@ -69,10 +69,12 @@ const Wrapper = styled.article``;
 
 const ImageWrapper = styled.div`
   position: relative;
+  min-width: 275px;
+  max-width: 450px;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  width: 100%;
   border-radius: 16px 16px 4px 4px;
 `;
 
@@ -109,8 +111,8 @@ const ImageTag = styled.span`
   font-size: ${14 / 16}rem;
   height: 32px;
   border-radius: 2px;
-  padding: 8px 10px;
-  line-height: 1;
+  padding: 0 10px;
+  line-height: 32px;
 `;
 
 const JustReleased = styled(ImageTag)`
